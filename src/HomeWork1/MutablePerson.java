@@ -14,7 +14,6 @@ public class MutablePerson {
     public int getAge() { return age; }
     public void setAge(int age) { this.age = age; }
 
-    // клонирование для защитного копирования
     public MutablePerson copy() {
         return new MutablePerson(this.name, this.age);
     }
