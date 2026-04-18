@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        String filePath = "src/text.txt";
+        String filePath = "src/HomeWork2/text.txt";
         if (!Files.exists(Paths.get(filePath))) {
             System.out.println("Файл не найден ");
             return;
