@@ -17,7 +17,7 @@ public class Main {
             System.out.println("Не удалось загрузить данные о студентах");
             return;
         }
-        System.out.println("=== Заполненная коллекция студентов ===\n");
+        System.out.println("Заполненная коллекция студентов");
         students.forEach(student -> {
             System.out.println(student);
             student.getBooks().forEach(book -> System.out.println("  - " + book));
@@ -26,25 +26,18 @@ public class Main {
 
         System.out.println("После стримов");
         students.stream()
-                .peek(s -> System.out.println("1. Студент: " + s.getName()))
+                .peek(System.out::println)
                 .map(Student::getBooks)
-                .peek(books -> System.out.println("2. Список книг студента, кол-во: " + books.size()))
                 .flatMap(List::stream)
-                .peek(book -> System.out.println("3. Книга: " + book.getTitle() + " (" + book.getPages() + " стр.)"))
                 .sorted(Comparator.comparingInt(Book::getPages))
-                .peek(book -> System.out.println("4. После сортировки: " + book.getTitle() + " - " + book.getPages() + " стр."))
                 .distinct()
-                .peek(book -> System.out.println("5. Уникальная книга: " + book.getTitle()))
                 .filter(book -> book.getYear() > 2000)
-                .peek(book -> System.out.println("6. После 2000 года: " + book.getTitle() + " (" + book.getYear() + ")"))
                 .limit(3)
-                .peek(book -> System.out.println("7. В лимите 3: " + book.getTitle()))
                 .map(Book::getYear)
-                .peek(year -> System.out.println("8. Год выпуска: " + year))
                 .findFirst()
                 .ifPresentOrElse(
-                        year -> System.out.println("Финальный результат - год: " + year),
-                        () -> System.out.println("Книга не найдена")
+                        year -> System.out.println("Год: " + year),
+                        () -> System.out.println("Не найдено")
                 );
     }
 
