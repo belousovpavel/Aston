@@ -1,10 +1,18 @@
 package HomeWork1;
 
-public class ImmutableWrapper {
+public final class ImmutableWrapper {
     private final String id;
     private final MutablePerson person;
 
     public ImmutableWrapper(String id, MutablePerson person) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("id не может быть null");
+        }
+        if (person == null) {
+            throw new IllegalArgumentException("person не может быть null");
+        }
+
         this.id = id;
         this.person = person.copy();
     }
