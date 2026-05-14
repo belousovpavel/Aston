@@ -19,10 +19,22 @@ public class LiveLock {
         }
 
         public void tryToPass(Person other) {
-            while (isPolite) {
-                System.out.println(name + ": пытается пройти, но видит " + other.name);
-                stepAside(other);
-                isPolite = !isPolite;
+            while (true) {  // Бесконечный цикл
+                if (isPolite) {
+                    System.out.println(name + ": пытается пройти, но видит " + other.name);
+                    stepAside(other);
+                    isPolite = false;
+
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    isPolite = true;
+                } else {
+                    System.out.println(name + " (невежливый, но все равно) уступает " + other.name);
+                    stepAside(other);
+                }
             }
         }
     }
